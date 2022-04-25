@@ -1,0 +1,62 @@
+{
+  "type": "page",
+  "body": {
+    "type": "flex",
+    "alignItems": "flex-start",
+    "justify": "start",
+    "items": [
+      {
+        "style": {
+          "backgroundColor": "#00BFFF",
+          "height": "200px",
+          "margin": 5
+        },
+        "type": "page",
+        "body": {
+          "type": "card",
+          "body": "kwg wkg ",
+          "header": {
+            "title": "title"
+          }
+        }
+      },
+      {
+        "style": {
+          "backgroundColor": "#00BFFF",
+          "height": "200px",
+          "margin": 5
+        },
+        "type": "page",
+        "body": {
+          "type": "card",
+          "body": "kwg wkg ",
+          "header": {
+            "title": "title"
+          }
+        }
+      },
+      {
+        "style": {
+          "backgroundColor": "#00BFFF",
+          "height": "200px",
+          "margin": 5
+        },
+        "type": "page",
+        "body": {
+          "type": "card",
+          "body": "kwg wkg ",
+          "header": {
+            "title": "title"
+          },
+          "toolbar": [
+            {
+              "type": "tpl",
+              "tpl": "标签",
+              "className": "label label-warning"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
