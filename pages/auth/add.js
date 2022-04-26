@@ -20,13 +20,10 @@
           "leftFixed": "lg"
         },
         api: {
-          url: '${API_URL}/user/add',
-          method: "post",
-          headers: {
-            "Authorization": "Bearer ${ls:token}"
-          },
+          url: '/user/add',
+          method: "post"
         },
-        // redirect: "/member/list",
+        redirect: "/member/list",
         messages: {
           saveSuccess: '保存成功',
           saveFailed: '保存失败'
@@ -64,5 +61,5 @@
       }]
     }
   }
-  window.jsonpCallback && window.jsonpCallback(response);
+  window.jsonpCallbackUserAdd && window.jsonpCallbackUserAdd(response);
 })();

@@ -21,13 +21,20 @@
               {
                 "label": "管理员",
                 "url": "list",
-                "schemaApi": "get:/pages/auth/list.json"
+                "schemaApi": {
+                  "url": "/pages/auth/list.json",
+                  "cache": 86400
+                }
               },
 
               {
                 "label": "添加",
                 "url": "add",
-                "schemaApi": "jsonp:/pages/auth/add.js?callback=jsonpCallback"
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/auth/add.js?callback=jsonpCallbackUserAdd",
+                  "cache": 86400
+                }
               }
             ]
           }

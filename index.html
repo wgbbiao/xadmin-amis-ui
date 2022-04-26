@@ -56,21 +56,6 @@
         }, err => {
           console.log(err);
         })
-        http.interceptors.response.use(
-          (res) => {
-            //相应成功做的事情
-            return res.data;
-          },
-          (err) => {
-            if (err.response.status == 401) {
-              localStorage.removeItem('token')
-              location.href = '/login.html';
-            }
-            console.log(err.response.data)
-            return Promise.reject(err.response.data.msg)
-          }
-        );
-
         // 如果想用 browserHistory 请切换下这处代码, 其他不用变
         // const history = History.createBrowserHistory();
         const history = History.createHashHistory();
@@ -83,6 +68,9 @@
             inline: false,
             className: 'w-full',
             tpl: '<div class="flex justify-between"><div>顶部区域左侧</div><div>顶部区域右侧</div></div>'
+          },
+          data: {
+            admin_url: API_URL,
           },
           footer: '<div class="p-2 text-center bg-light">底部区域</div>',
           api: '/pages/site.json'

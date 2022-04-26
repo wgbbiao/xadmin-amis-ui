@@ -16,11 +16,8 @@
       "type": "crud",
       "name": "member",
       "api": {
-        "url": "${API_URL}/user/list",
+        "url": "/user/list",
         "method": "get",
-        "headers": {
-          "Authorization": "Bearer ${ls:token}"
-        },
         "data": {
           "nickname": "${nickname}",
           "page": "${page}"
