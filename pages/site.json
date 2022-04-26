@@ -14,15 +14,22 @@
       {
         "children": [
           {
-            "label": "会员管理",
+            "label": "管理员与权限",
             "url": "/member",
-            "schemaApi": "get:/pages/auth/list.json"
-          },
+            "icon": "fa fa-users",
+            "children": [
+              {
+                "label": "管理员",
+                "url": "list",
+                "schemaApi": "get:/pages/auth/list.json"
+              },
 
-          {
-            "label": "添加",
-            "url": "/member/add",
-            "schemaApi": "jsonp:/pages/auth/add.js?callback=jsonpCallback"
+              {
+                "label": "添加",
+                "url": "add",
+                "schemaApi": "jsonp:/pages/auth/add.js?callback=jsonpCallback"
+              }
+            ]
           }
         ]
       }

@@ -3,21 +3,33 @@
     "status": 0,
     "data": {
       "type": "page",
-      "title": "会员列表",
+      "title": "添加管理员",
       "remark": null,
       toolbar: [{
         type: 'button',
         label: '返回列表',
         actionType: 'link',
-        link: '/member'
+        link: '/member/list'
       }],
-      "body": [{
-        title: '会员信息',
+      body: [{
+        title: '管理员信息',
         type: 'form',
         name: 'memberForm',
         mode: "horizontal",
-        "horizontal": {
+        horizontal: {
           "leftFixed": "lg"
+        },
+        api: {
+          url: '${API_URL}/user/add',
+          method: "post",
+          headers: {
+            "Authorization": "Bearer ${ls:token}"
+          },
+        },
+        // redirect: "/member/list",
+        messages: {
+          saveSuccess: '保存成功',
+          saveFailed: '保存失败'
         },
         controls: [
           {

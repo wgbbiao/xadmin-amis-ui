@@ -47,6 +47,15 @@
             'Content-Type': 'application/json'
           }
         });
+        // 请求拦截
+        http.interceptors.request.use(config => {
+          //请求头设置
+          let token = localStorage.getItem('token') || ''
+          config.headers.Authorization = 'Bearer ' + token
+          return config
+        }, err => {
+          console.log(err);
+        })
         http.interceptors.response.use(
           (res) => {
             //相应成功做的事情
@@ -57,6 +66,8 @@
               localStorage.removeItem('token')
               location.href = '/login.html';
             }
+            console.log(err.response.data)
+            return Promise.reject(err.response.data.msg)
           }
         );
 
