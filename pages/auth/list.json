@@ -27,6 +27,16 @@
       "perPage": 20,
       "filterTogglable": true,
       "autoGenerateFilter": true,
+      "syncLocation": false,
+      "quickSaveItemApi": {
+        "url": "/user/edit",
+        "method": "post",
+        "data": {
+          "id": "${id}",
+          "username": "${username}",
+          "is_super": "${is_super}"
+        }
+      },
       "columns": [
         {
           "label": "ID",
@@ -55,7 +65,14 @@
           "label": "是否是超级管理员",
           "type": "status",
           "value": 0,
-          "quickEdit": true
+          "quickEdit": {
+            "type": "switch",
+            "name": "is_super",
+            "label": "是否是超级管理员",
+            "onText": "是",
+            "offText": "不是",
+            "saveImmediately": true
+          }
         },
         {
           "label": "创建时间",
@@ -80,39 +97,8 @@
             {
               "label": "修改信息",
               "type": "button",
-              "actionType": "dialog",
-              "dialog": {
-                "title": "修改信息",
-                "body": {
-                  "type": "form",
-                  "api": "post:/admin/User/${id}",
-                  "data": {
-                    "guide_type": "${!((newbie & 512) == 512)}"
-                  },
-                  "body": [
-                    {
-                      "type": "radios",
-                      "label": "导游身份:",
-                      "name": "guide_type",
-                      "options": [
-                        {
-                          "label": "导游",
-                          "value": true
-                        },
-                        {
-                          "label": "非导游",
-                          "value": false
-                        }
-                      ]
-                    },
-                    {
-                      "type": "input-text",
-                      "name": "nickname",
-                      "label": "用户名:"
-                    }
-                  ]
-                }
-              }
+              "actionType": "link",
+              "link": "/member/edit/${id}"
             }
           ]
         }

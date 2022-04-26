@@ -26,13 +26,21 @@
                   "cache": 86400
                 }
               },
-
               {
                 "label": "添加",
                 "url": "add",
                 "schemaApi": {
                   "method": "jsonp",
                   "url": "/pages/auth/add.js?callback=jsonpCallbackUserAdd",
+                  "cache": 86400
+                }
+              },
+              {
+                "label": "编辑管理员",
+                "url": "edit/:id",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/auth/edit.js?callback=jsonpCallbackUserEdit",
                   "cache": 86400
                 }
               }
