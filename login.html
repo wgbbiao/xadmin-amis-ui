@@ -1,115 +1,178 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-    <head>
-        <meta charset="UTF-8" />
-        <title>登录</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/sdk.css">
-        </link>
-        <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/helper.css">
-        </link>
-        <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/iconfont.css">
-        </link>
+  <head>
+    <meta charset="UTF-8" />
+    <title>登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/sdk.css">
+    </link>
+    <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/helper.css">
+    </link>
+    <link rel="stylesheet" href="https://unpkg.com/amis@beta/sdk/iconfont.css">
+    </link>
 
-        <!-- 这是默认主题所需的，如果是其他主题则不需要 -->
-        <!-- 从 1.1.0 开始 sdk.css 将不支持 IE 11，如果要支持 IE11 请引用这个 css，并把前面那个删了 -->
-        <!-- <link rel="stylesheet" href="sdk-ie11.css" /> -->
-        <!-- 不过 amis 开发团队几乎没测试过 IE 11 下的效果，所以可能有细节功能用不了，如果发现请报 issue -->
-        <style>
-            html,
-            body,
-            .app-wrapper {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
+    <!-- 这是默认主题所需的，如果是其他主题则不需要 -->
+    <!-- 从 1.1.0 开始 sdk.css 将不支持 IE 11，如果要支持 IE11 请引用这个 css，并把前面那个删了 -->
+    <!-- <link rel="stylesheet" href="sdk-ie11.css" /> -->
+    <!-- 不过 amis 开发团队几乎没测试过 IE 11 下的效果，所以可能有细节功能用不了，如果发现请报 issue -->
+    <style>
+      html,
+      body,
+      .app-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .login-form {
+        position: absolute;
+        top: 50%;
+        right: 160px;
+        transform: translateY(-60%);
+        width: 300px;
+      }
+
+    </style>
+    <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
+    <script src="https://unpkg.com/axios"></script>
+    <script>
+      (function() {
+        if (localStorage.getItem('token')) {
+          location.href = '../'
+        }
+      })()
+    </script>
+  </head>
+
+  <body>
+    <div id="root" class="app-wrapper"></div>
+    <script>
+      const API_URL = "http://localhost:7070/admin";
+      (function() {
+        let amis = amisRequire('amis/embed');
+        const match = amisRequire('path-to-regexp').match;
+        // axios 封装
+        const http = axios.create({
+          baseURL: API_URL,
+          timeout: 5000,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const app = {
+          type: "page",
+          label: '111',
+          style: {
+            background: 'url(https://yingyu.zoulaizouqu.cn/admin/assets/login-bg.d74d55c1.jpg) no-repeat ',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          },
+          body: {
+            type: "container",
+            className: 'login-form',
+            body: {
+              title: {
+                type: 'tpl',
+                tpl: '<span style="font-size:30px">登录</span>'
+              },
+              type: "form",
+              api: {
+                method: 'post',
+                url: `${API_URL}/login`,
+                adaptor: function(payload, response) {
+                  if (payload.status == 0) {
+                    localStorage.setItem('token', payload.data.token);
+                  }
+                  return payload
+                }
+              },
+              messages: {
+                saveSuccess: '登录成功',
+                saveFailed: '登录失败',
+                fetchFailed: '获取数据失败'
+              },
+              body: [
+                {
+                  type: 'input-text',
+                  name: 'username',
+                  placeholder: '请输入账号',
+                  "prefix": "🙍",
+                },
+                {
+                  type: 'input-password',
+                  name: 'password',
+                  placeholder: '请输入密码',
+                  "prefix": "🔒"
+                }
+              ],
+              actions: [
+                {
+                  type: 'submit',
+                  level: 'primary',
+                  label: "登录",
+                  "actionType": "ajax",
+                  "redirect": "/"
+                }
+              ]
             }
+          }
+        };
 
-            .login-form {
-                position: absolute;
-                top: 50%;
-                right: 160px;
-                transform: translateY(-60%);
-                width: 300px;
-            }
+        let amisInstance = amis.embed(
+          '#root',
+          app,
+          {},
+          {
+            fetcher: ({
+              url, // 接口地址
+              method, // 请求方法 get、post、put、delete
+              data, // 请求数据
+              responseType,
+              config, // 其他配置
+              headers // 请求头
+            }) => {
+              config = config || {};
+              config.withCredentials = true;
+              responseType && (config.responseType = responseType);
+              if (config.cancelExecutor) {
+                config.cancelToken = new axios.CancelToken(
+                  config.cancelExecutor
+                );
+              }
 
-        </style>
-        <script src="https://unpkg.com/amis@beta/sdk/sdk.js"></script>
-    </head>
+              config.headers = headers || {};
 
-    <body>
-        <div id="root" class="app-wrapper"></div>
-        <script>
-            const API_URL = "http://localhost:7070/admin";
-            (function() {
-                let amis = amisRequire('amis/embed');
-                const match = amisRequire('path-to-regexp').match;
+              if (method !== 'post' && method !== 'put' && method !== 'patch') {
+                if (data) {
+                  config.params = data;
+                }
+                return http[method](url, config);
+              } else if (data && data instanceof FormData) {
+                config.headers = config.headers || {};
+                config.headers['Content-Type'] = 'multipart/form-data';
+              } else if (
+                data &&
+                typeof data !== 'string' &&
+                !(data instanceof Blob) &&
+                !(data instanceof ArrayBuffer)
+              ) {
+                data = JSON.stringify(data);
+                config.headers = config.headers || {};
+                config.headers['Content-Type'] = 'application/json';
+              }
 
-                const app = {
-                    type: "page",
-                    label: '111',
-                    style: {
-                        background: 'url(https://yingyu.zoulaizouqu.cn/admin/assets/login-bg.d74d55c1.jpg) no-repeat ',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
-                    },
-                    body: {
-                        type: "container",
-                        className: 'login-form',
-                        body: {
-                            title: {
-                                type: 'tpl',
-                                tpl: '<span style="font-size:30px">登录</span>'
-                            },
-                            type: "form",
-                            api: {
-                                method: 'post',
-                                url: `${API_URL}/login`
-                            },
-                            messages: {
-                                saveSuccess: '登录成功',
-                                saveFailed: '登录失败',
-                                fetchFailed: '获取数据失败'
-                            },
-                            body: [
-                                {
-                                    type: 'input-text',
-                                    name: 'username',
-                                    placeholder: '请输入账号',
-                                    "prefix": "🙍",
-                                },
-                                {
-                                    type: 'input-password',
-                                    name: 'password',
-                                    placeholder: '请输入密码',
-                                    "prefix": "🔒",
-                                    addOn: {
-                                        type: 'button',
-                                        label: "🔍"
-                                    }
-                                }
-                            ],
-                            actions: [
-                                {
-                                    type: 'submit',
-                                    level: 'primary',
-                                    label: "登录"
-                                }
-                            ]
-                        }
-                    }
-                };
-
-                let amisInstance = amis.embed(
-                    '#root',
-                    app, {}, {
-                });
-            })();
-        </script>
-    </body>
+              return http[method](url, data, config);
+            },
+          }
+        );
+      })();
+    </script>
+  </body>
 
 </html>

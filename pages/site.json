@@ -1,0 +1,31 @@
+{
+  "status": 0,
+  "data": {
+    "pages": [
+      {
+        "children": [
+          {
+            "label": "首页",
+            "url": "/",
+            "schemaApi": "get:/pages/index.json"
+          }
+        ]
+      },
+      {
+        "children": [
+          {
+            "label": "会员管理",
+            "url": "/member",
+            "schemaApi": "get:/pages/auth/list.json"
+          },
+
+          {
+            "label": "添加",
+            "url": "/member/add",
+            "schemaApi": "jsonp:/pages/auth/add.js?callback=jsonpCallback"
+          }
+        ]
+      }
+    ]
+  }
+}

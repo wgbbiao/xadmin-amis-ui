@@ -1,0 +1,134 @@
+{
+  "status": 0,
+  "data": {
+    "type": "page",
+    "title": "会员列表",
+    "toolbar": [
+      {
+        "type": "button",
+        "actionType": "link",
+        "link": "/member/add",
+        "label": "新增",
+        "primary": true
+      }
+    ],
+    "body": {
+      "type": "crud",
+      "name": "member",
+      "api": {
+        "url": "${API_URL}/user/list",
+        "method": "get",
+        "headers": {
+          "Authorization": "Bearer ${ls:token}"
+        },
+        "data": {
+          "nickname": "${nickname}",
+          "page": "${page}"
+        }
+      },
+
+      "perPage": 20,
+      "filterTogglable": true,
+      "autoGenerateFilter": true,
+      "columns": [
+        {
+          "label": "ID",
+          "name": "id",
+          "type": "text",
+          "searchable": {
+            "type": "input-text",
+            "name": "id",
+            "label": "主键",
+            "placeholder": "输入id"
+          }
+        },
+        {
+          "label": "用户名",
+          "name": "username",
+          "type": "text",
+          "copyable": true,
+          "searchable": {
+            "type": "input-text",
+            "name": "username",
+            "placeholder": "输入用户名"
+          }
+        },
+        {
+          "name": "is_super",
+          "label": "是否是超级管理员",
+          "type": "status",
+          "value": 0,
+          "quickEdit": true
+        },
+        {
+          "label": "创建时间",
+          "name": "created_at",
+          "type": "date",
+          "format": "YYYY-MM-DD HH:mm:ss"
+        },
+        {
+          "type": "operation",
+          "label": "操作",
+          "width": "150px",
+          "fixed": "right",
+          "buttons": [
+            {
+              "label": "删除",
+              "type": "button",
+              "actionType": "ajax",
+              "level": "danger",
+              "confirmText": "确定删除吗？",
+              "api": "delete:/admiels/User/${id}"
+            },
+            {
+              "label": "修改信息",
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "title": "修改信息",
+                "body": {
+                  "type": "form",
+                  "api": "post:/admin/User/${id}",
+                  "data": {
+                    "guide_type": "${!((newbie & 512) == 512)}"
+                  },
+                  "body": [
+                    {
+                      "type": "radios",
+                      "label": "导游身份:",
+                      "name": "guide_type",
+                      "options": [
+                        {
+                          "label": "导游",
+                          "value": true
+                        },
+                        {
+                          "label": "非导游",
+                          "value": false
+                        }
+                      ]
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "nickname",
+                      "label": "用户名:"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "affixHeader": true,
+      "columnsTogglable": "auto",
+      "placeholder": "暂无数据",
+      "tableClassName": "table-db table-striped",
+      "headerClassName": "crud-table-header",
+      "footerClassName": "crud-table-footer",
+      "toolbarClassName": "crud-table-toolbar",
+      "combineNum": 0,
+      "bodyClassName": "panel-default"
+    }
+  }
+}
