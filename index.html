@@ -56,6 +56,20 @@
         }, err => {
           console.log(err);
         })
+        http.interceptors.response.use(
+          (res) => {
+            //相应成功做的事情
+            return res;
+          },
+          (err) => {
+            if (err.response.status == 401) {
+              localStorage.removeItem('token')
+              location.href = '/login.html';
+            }
+            console.log(err.response.data)
+            return Promise.reject(err.response.data.msg)
+          }
+        );
         // 如果想用 browserHistory 请切换下这处代码, 其他不用变
         // const history = History.createBrowserHistory();
         const history = History.createHashHistory();
@@ -240,7 +254,7 @@
                 config.headers['Content-Type'] = 'application/json';
               }
 
-              return http[method](url, data, config);
+              return http[method](url, data, config)
             },
           }
         );

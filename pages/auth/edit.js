@@ -52,8 +52,9 @@
             type: "button",
             label: '点击这里修改密码',
             description: "点击这里修改密码",
-            actionType: 'url',
+            actionType: 'link',
             level: 'primary',
+            link: '${id}/password'
           },
           {
             type: 'divider'

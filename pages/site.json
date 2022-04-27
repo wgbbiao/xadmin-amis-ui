@@ -43,6 +43,15 @@
                   "url": "/pages/auth/edit.js?callback=jsonpCallbackUserEdit",
                   "cache": 86400
                 }
+              },
+              {
+                "label": "修改密码",
+                "url": "edit/:id/password",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/auth/password.js?callback=jsonpCallbackUserPassword",
+                  "cache": 86400
+                }
               }
             ]
           }
