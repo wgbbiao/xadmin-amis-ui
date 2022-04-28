@@ -10,7 +10,6 @@
                 method: "put",
             },
             redirect: "/auth/contentType/list",
-
             initApi: {
                 url: "/contenttype/${params.id}",
                 method: "get",
