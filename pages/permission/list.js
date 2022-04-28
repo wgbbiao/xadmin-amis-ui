@@ -57,7 +57,6 @@
         },
         {
           label: '操作',
-          name: 'action',
           type: 'operation',
           fixed: "right",
           buttons: [
