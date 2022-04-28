@@ -21,29 +21,17 @@
                     id: '${INT(params.id)}',
                     name: '${name}',
                     code: '${code}',
-                    content_type_id: '${content_type_id}',
+                    content_type_id: '${xadmin_permission_content_type}',
                 }
             },
             initApi: {
-                url: '/permission/${params.id}',
-                adaptor(payload) {
-                    console.log(payload)
-                    return {
-                        status: 0,
-                        data: {
-                            id: payload.data.id,
-                            content_type_id: payload.data.edges.ContentType.id,
-                            name: payload.data.name,
-                            code: payload.data.code,
-                        }
-                    };
-                }
+                url: '/permission/${params.id}'
             },
             redirect: '/auth/permission',
             controls: [
                 {
                     type: "select",
-                    name: "content_type_id",
+                    name: "xadmin_permission_content_type",
                     label: "内容类型",
                     source: {
                         url: '/contenttype/list',
