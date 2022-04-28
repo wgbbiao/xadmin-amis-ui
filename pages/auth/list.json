@@ -19,7 +19,7 @@
         "url": "/user/list",
         "method": "get",
         "data": {
-          "nickname": "${nickname}",
+          "username": "${username}",
           "page": "${page}"
         }
       },
@@ -41,13 +41,7 @@
         {
           "label": "ID",
           "name": "id",
-          "type": "text",
-          "searchable": {
-            "type": "input-text",
-            "name": "id",
-            "label": "主键",
-            "placeholder": "输入id"
-          }
+          "type": "text"
         },
         {
           "label": "用户名",
@@ -92,7 +86,13 @@
               "actionType": "ajax",
               "level": "danger",
               "confirmText": "确定删除吗？",
-              "api": "delete:/admiels/User/${id}"
+              "api": {
+                "url": "/user/delete",
+                "method": "post",
+                "data": {
+                  "id": "${id}"
+                }
+              }
             },
             {
               "label": "修改信息",

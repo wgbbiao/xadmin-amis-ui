@@ -27,8 +27,9 @@
                 }
               },
               {
-                "label": "添加",
+                "label": "添加管理员",
                 "url": "add",
+                "visible": false,
                 "schemaApi": {
                   "method": "jsonp",
                   "url": "/pages/auth/add.js?callback=jsonpCallbackUserAdd",
