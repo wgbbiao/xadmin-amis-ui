@@ -64,7 +64,7 @@
               type: 'button',
               label: '编辑',
               actionType: 'link',
-              link: '/permission/edit/${id}',
+              link: 'permission/edit/${id}',
               level: "primary"
             },
             {
@@ -72,10 +72,7 @@
               label: '删除',
               actionType: 'ajax',
               confirmText: "确定删除吗？",
-              api: {
-                url: '/permission/delete/${id}',
-                method: "delete"
-              },
+              api: 'delete:/permission/${id}',
               level: "danger"
             }
           ]

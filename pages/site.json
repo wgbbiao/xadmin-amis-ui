@@ -83,6 +83,15 @@
                 }
               },
               {
+                "label": "编辑权限",
+                "url": "permission/edit/:id",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/permission/edit.js?callback=jsonpCallbackPermissionEdit",
+                  "cache": 86400
+                }
+              },
+              {
                 "label": "文档列表",
                 "url": "contentType/list",
                 "schemaApi": {
