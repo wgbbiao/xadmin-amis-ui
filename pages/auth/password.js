@@ -18,7 +18,7 @@
           "leftFixed": "lg"
         },
         api: {
-          url: '/user/change-password',
+          url: '/user/modify_password',
           method: "post",
           data: {
             id: '${INT(params.id)}',
