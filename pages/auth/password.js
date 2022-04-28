@@ -6,7 +6,7 @@
       type: 'button',
       label: '返回列表',
       actionType: 'link',
-      link: '/member/list'
+      link: '/auth/list'
     }],
     body: [
       {

@@ -7,7 +7,7 @@
       type: 'button',
       label: '返回列表',
       actionType: 'link',
-      link: '/member/list'
+      link: '/auth/list'
     }],
     body: [
       {
@@ -31,7 +31,7 @@
           url: '/user/${params.id}',
           method: "get"
         },
-        redirect: "/member/list",
+        redirect: "/auth/list",
         messages: {
           saveSuccess: '保存成功',
           saveFailed: '保存失败'

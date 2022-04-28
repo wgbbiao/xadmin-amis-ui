@@ -15,7 +15,7 @@
         "children": [
           {
             "label": "管理员与权限",
-            "url": "/member",
+            "url": "/auth",
             "icon": "fa fa-users",
             "children": [
               {
@@ -51,6 +51,34 @@
                 "schemaApi": {
                   "method": "jsonp",
                   "url": "/pages/auth/password.js?callback=jsonpCallbackUserPassword",
+                  "cache": 86400
+                }
+              },
+              {
+                "label": "角色",
+                "url": "role",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/role/list.js?callback=jsonpCallbackRoleList",
+                  "cache": 86400
+                }
+              },
+              {
+                "label": "权限",
+                "url": "permission",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/permission/list.js?callback=jsonpCallbackPermissionList",
+                  "cache": 86400
+                }
+              },
+              {
+                "label": "添加权限",
+                "url": "permission/add",
+                "visible": false,
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/permission/add.js?callback=jsonpCallbackPermissionAdd",
                   "cache": 86400
                 }
               }

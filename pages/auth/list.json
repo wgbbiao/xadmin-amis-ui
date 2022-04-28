@@ -7,7 +7,7 @@
       {
         "type": "button",
         "actionType": "link",
-        "link": "/member/add",
+        "link": "/auth/add",
         "label": "添加管理员",
         "primary": true
       }
@@ -98,7 +98,7 @@
               "label": "修改信息",
               "type": "button",
               "actionType": "link",
-              "link": "/member/edit/${id}"
+              "link": "/auth/edit/${id}"
             }
           ]
         }
