@@ -90,6 +90,15 @@
                   "url": "/pages/ContentType/list.js?callback=jsonpCallbackContentTypeList",
                   "cache": 86400
                 }
+              },
+              {
+                "label": "修改文档",
+                "url": "contenttype/edit/:id",
+                "schemaApi": {
+                  "method": "jsonp",
+                  "url": "/pages/ContentType/edit.js?callback=jsonpCallbackContentTypeEdit",
+                  "cache": 86400
+                }
               }
             ]
           }

@@ -47,7 +47,7 @@
                             type: 'button',
                             label: '编辑',
                             actionType: 'link',
-                            link: '/contenttype/edit/${id}',
+                            link: '/auth/contenttype/edit/${id}',
                             level: "primary"
                         },
                         {
