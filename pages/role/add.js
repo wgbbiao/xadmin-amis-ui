@@ -23,7 +23,7 @@
           permission_ids: '${permission_ids|split:","|map:toInt}',
         }
       },
-      redirect: '/role',
+      redirect: '/auth/role',
       controls: [
         {
           type: 'text',
