@@ -25,7 +25,8 @@
                 }
             },
             initApi: {
-                url: '/permission/${params.id}'
+                url: '/permission/${params.id}',
+                method: 'get'
             },
             redirect: '/auth/permission',
             controls: [

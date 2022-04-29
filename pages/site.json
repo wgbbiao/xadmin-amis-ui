@@ -61,7 +61,27 @@
                   "method": "jsonp",
                   "url": "/pages/role/list.js?callback=jsonpCallbackRoleList",
                   "cache": 86400
-                }
+                },
+                "children": [
+                  {
+                    "label": "添加角色",
+                    "url": "add",
+                    "schemaApi": {
+                      "method": "jsonp",
+                      "url": "/pages/role/add.js?callback=jsonpCallbackRoleAdd",
+                      "cache": 86400
+                    }
+                  },
+                  {
+                    "label": "编辑角色",
+                    "url": "edit/:id",
+                    "schemaApi": {
+                      "method": "jsonp",
+                      "url": "/pages/role/edit.js?callback=jsonpCallbackRoleEdit",
+                      "cache": 86400
+                    }
+                  }
+                ]
               },
               {
                 "label": "权限",
